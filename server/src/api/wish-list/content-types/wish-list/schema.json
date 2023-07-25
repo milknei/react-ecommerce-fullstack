@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "wish_lists",
+  "info": {
+    "singularName": "wish-list",
+    "pluralName": "wish-lists",
+    "displayName": "Wish List",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "items": {
+      "type": "json"
+    },
+    "userEmail": {
+      "type": "email"
+    }
+  }
+}
