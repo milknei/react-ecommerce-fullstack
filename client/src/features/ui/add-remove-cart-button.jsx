@@ -31,6 +31,7 @@ export const AddRemoveCartButton = ({ item, size = 'large' }) => {
                 id: item.id,
                 name: item.name,
                 quantity: 1,
+                platforms: item.platforms,
                 platform: item.platforms[0].platform.name,
                 screenshot: item.background_image,
                 price: item.price,

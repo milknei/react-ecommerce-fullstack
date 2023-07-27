@@ -121,6 +121,7 @@ export const AddRemoveCartButtonExtended = ({ item, screenshot }) => {
               id: item.id,
               name: item.name,
               quantity: quantity,
+              platforms: item.platforms,
               platform: platform,
               screenshot: screenshot,
               price: item.price,

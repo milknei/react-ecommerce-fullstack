@@ -5,7 +5,9 @@ import { getItemsBase, getFilteredItems, getItemsByUrl } from '@entities/item/in
 import { Sidebar } from '@widgets/sidebar/index';
 import { LoadingProgress } from '@shared';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Typography, Box } from '@mui/material';
+import { Typography, Box, useTheme } from '@mui/material';
+import ScrollToTop from 'react-scroll-to-top';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 export const GamesPage = () => {
   const [items, setItems] = useState([]);
@@ -17,6 +19,8 @@ export const GamesPage = () => {
   const [nextPageError, setNextPageError] = useState(null);
   const [areItemsLoading, setAreItemsLoading] = useState(false);
   const [filters, setFilters] = useState([]);
+
+  const theme = useTheme();
 
   const getNextItems = async () => {
     setIsNextLoading(true);
@@ -117,6 +121,24 @@ export const GamesPage = () => {
         sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: { xs: 0, sm: 2, md: 3 } }}
       >
         <Sidebar filters={filters} submitHelper={submitHelper} />
+        <ScrollToTop
+          smooth
+          style={{
+            borderRadius: '50%',
+            left: '40px',
+            width: '50px',
+            height: '50px',
+            backgroundColor: theme.palette.action.active,
+  
+          }}
+          className='no-highlight'
+          top='400'
+          component={
+            <KeyboardArrowUpIcon
+              sx={{ position: 'relative', top: '2px', fontSize: '2rem', color: 'background.paper' }}
+            />
+          }
+        />
         <Box sx={{ pt: 2, width: '100%', pr: '0 !important' }}>
           <ItemListDetailed items={items} areItemsLoading={areItemsLoading} />
           {isNextLoading && (

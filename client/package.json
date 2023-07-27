@@ -27,6 +27,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-responsive-masonry": "^2.1.7",
     "react-router-dom": "^6.14.1",
+    "react-scroll-to-top": "^3.0.0",
     "sass": "^1.63.6",
     "yup": "^1.2.0"
   },

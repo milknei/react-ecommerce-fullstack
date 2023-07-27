@@ -1,4 +1,5 @@
-import { Box, Container, Divider, Typography, useTheme, Modal } from '@mui/material';
+import { Box, Divider, Typography, useTheme, Modal, FormControl, Select, InputLabel, MenuItem } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -6,7 +7,7 @@ import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { StyledIconButton, FlexBox, ButtonMain, useMousePosition } from '@shared/index';
-import { decreaseQuantity, increaseQuantity, removeFromCart, setIsCartOpen } from '@entities/cart/index';
+import { decreaseQuantity, increaseQuantity, removeFromCart, setIsCartOpen, setPlatform } from '@entities/cart/index';
 
 export const CartMenu = () => {
   const theme = useTheme();
@@ -92,7 +93,7 @@ export const CartMenu = () => {
                   </FlexBox>
                   <Box sx={{ overflowY: 'scroll', flex: '1 1 auto' }}>
                     {cart.map((item) => (
-                      <Box key={`${item.name}-${item.id}`}>
+                      <Box key={`${item.name}-${item.id}-${item.platform}`}>
                         <Box sx={{ position: 'relative', padding: '0 1rem', my: 1 }}>
                           <Box
                             sx={{
@@ -103,12 +104,12 @@ export const CartMenu = () => {
                               left: 0,
                               background: ` center / cover no-repeat url(${item.screenshot})`,
                               opacity: 0.1,
-                              zIndex: 1
+                              zIndex: 1,
                             }}
                           ></Box>
                           <FlexBox sx={{ padding: '15px 0', zIndex: 2, position: 'relative' }}>
                             <Box sx={{ flex: '1 1 60%' }}>
-                              <FlexBox sx={{ marginBottom: '0.3125rem' }}>
+                              <FlexBox>
                                 <Typography
                                   variant="body1"
                                   sx={{ fontWeight: 'bold', cursor: 'pointer' }}
@@ -120,8 +121,36 @@ export const CartMenu = () => {
                                   <CloseIcon sx={{ color: 'text.primary' }} />
                                 </StyledIconButton>
                               </FlexBox>
-                              <Typography>Platform: {item.platform}</Typography>
-                              <FlexBox sx={{ marginTop: '2rem' }}>
+                              {/* <ChoosePlatform platform={item.platform} setPlatform={() => {}} /> */}
+                              {/* <Typography>Platform: {item.platform}</Typography> */}
+
+                              <StyledFormControl sx={{ width: '100%', maxWidth: '10rem', my: 3 }}>
+                                <InputLabel id="demo-simple-select-label">Platforms</InputLabel>
+                                <StyledSelect
+                                  labelId="demo-simple-select-label"
+                                  id="demo-simple-select"
+                                  value={item.platform}
+                                  label="Platforms"
+                                  onChange={(e) =>
+                                    dispatch(
+                                      setPlatform({
+                                        id: item.id,
+                                        platform: item.platform,
+                                        newPlatform: e.target.value,
+                                        quantity: item.quantity,
+                                      })
+                                    )
+                                  }
+                                >
+                                  {item.platforms.map((platform) => (
+                                    <MenuItem key={platform.platform.id} value={platform.platform.name}>
+                                      {platform.platform.name}
+                                    </MenuItem>
+                                  ))}
+                                </StyledSelect>
+                              </StyledFormControl>
+
+                              <FlexBox>
                                 <Box
                                   sx={{
                                     display: 'flex',
@@ -129,11 +158,15 @@ export const CartMenu = () => {
                                     border: `0.0938rem solid ${theme.palette.text.secondary}`,
                                   }}
                                 >
-                                  <StyledIconButton onClick={() => dispatch(decreaseQuantity({ id: item.id }))}>
+                                  <StyledIconButton
+                                    onClick={() => dispatch(decreaseQuantity({ id: item.id, platform: item.platform }))}
+                                  >
                                     <RemoveIcon sx={{ color: 'text.primary' }} />
                                   </StyledIconButton>
                                   <Typography>{item.quantity}</Typography>
-                                  <StyledIconButton onClick={() => dispatch(increaseQuantity({ id: item.id }))}>
+                                  <StyledIconButton
+                                    onClick={() => dispatch(increaseQuantity({ id: item.id, platform: item.platform }))}
+                                  >
                                     <AddIcon sx={{ color: 'text.primary' }} />
                                   </StyledIconButton>
                                 </Box>
@@ -170,3 +203,15 @@ export const CartMenu = () => {
       </Modal>
     );
 };
+
+const StyledSelect = styled(Select)(({ theme }) => ({
+  '&>div': {
+    padding: '7px 7px',
+  },
+}));
+
+const StyledFormControl = styled(FormControl)(({ theme }) => ({
+  '&>label': {
+    top: '2px',
+  },
+}));
