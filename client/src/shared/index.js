@@ -16,3 +16,4 @@ export { LoadingProgress } from './ui/loading-progress';
 export { ButtonMain } from './ui/button-main';
 export { Alert } from './ui/alert';
 export { useMousePosition } from './lib/use-mouse-position';
+export { Footer } from './ui/footer';

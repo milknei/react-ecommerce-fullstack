@@ -29,7 +29,7 @@ export const ItemCardDescription = ({ released, genres, rating, isHovered }) => 
             <div>{`${date.toDateString().slice(3)}`}</div>
           </FlexBox>
           <Divider variant="middle" />
-          <FlexBox sx={{ gap: '2rem', padding: '.5rem 0' }}>
+          <FlexBox sx={{ gap: 1, padding: '.5rem 0' }}>
             <div>Genres:</div>
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', flexWrap: 'wrap', gap: 1 }}>
               {genres.map((genre) => {

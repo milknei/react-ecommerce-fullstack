@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react';
-import { Box, Typography, useTheme, Container, Chip, Divider, Button } from '@mui/material';
-import { StyledIconButton, FlexBox, ParallelogramTag } from '@shared/index';
+import { Box, Typography, Container, Chip, Divider } from '@mui/material';
+import { FlexBox } from '@shared/index';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AddRemoveWishListButtonExtended, AddRemoveCartButtonExtended } from '@features/index';
 import ImageGallery from 'react-image-gallery';
@@ -42,45 +42,24 @@ export const ItemPage = () => {
     return <div>AAAA</div>;
   }
 
-  if (item?.detail === "Not found.") return <Typography>Item not found</Typography>;
+  if (item?.detail === 'Not found.') return <Typography>Item not found</Typography>;
 
   if (item && screenshots)
     return (
       <Container maxWidth="xxl">
-        {/* <Box
+        <Box
           sx={{
-            position: 'absolute',
-            left: 0,
-            width: '100vw',
+            width: '100%',
             height: '100%',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            background: ` center / cover no-repeat url(${item.background_image})`,
+            opacity: 0.1,
             zIndex: 0,
-            backgroundColor: 'background.default',
           }}
-        >
-          <Box sx={{ position: 'relative' }}>
-            <img
-              style={{
-                width: '100%',
-                zIndex: 0,
-                opacity: 1,
-              }}
-              src={item.background_image}
-              alt=""
-            />
-            <Box
-              sx={{
-                width: '100%',
-                height: '100%',
-                position: 'asolute',
-                top: 0,
-                left: 0,
-                background: `linear-gradient(0deg, ${theme.palette.background.default} 9%, rgba(0,0,0,1) 82%)`,
-                zIndex: 2,
-              }}
-            ></Box>
-          </Box>
-        </Box> */}
-        <Box sx={{ width: '100%', color: 'text.primary', zIndex: 2 }}>
+        ></Box>
+        <Box sx={{ width: '100%', color: 'text.primary', mt: 3, zIndex: 2 }}>
           <Typography variant="h2" component="h1" sx={{ pb: 2, fontWeight: 600 }}>
             {item.name}
           </Typography>

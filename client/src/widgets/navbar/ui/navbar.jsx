@@ -24,15 +24,18 @@ export const Navbar = () => {
   const closeModal = () => setIsModalOpened(false);
 
   return (
-    <Box sx={{
-      width: '100%',
-        backgroundColor: 'background.default',
+    <Box
+      sx={{
+        width: '100%',
+        backgroundColor: (theme) =>
+          theme.palette.mode === 'light' ? 'rgba(256, 256, 256, 0.98)' : 'rgba(0, 0, 0, 0.95)',
         color: 'tex.primary',
         position: 'fixed',
         top: '0',
         left: '0',
         zIndex: '1000',
-      }}>
+      }}
+    >
       <NavbarModal
         closeModal={closeModal}
         isModalOpened={isModalOpened}
@@ -46,7 +49,7 @@ export const Navbar = () => {
           alignItems: 'center',
           width: '100%',
           height: '3.75rem',
-          mx: 'auto'
+          mx: 'auto',
         }}
       >
         <Box

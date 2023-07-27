@@ -121,8 +121,6 @@ export const CartMenu = () => {
                                   <CloseIcon sx={{ color: 'text.primary' }} />
                                 </StyledIconButton>
                               </FlexBox>
-                              {/* <ChoosePlatform platform={item.platform} setPlatform={() => {}} /> */}
-                              {/* <Typography>Platform: {item.platform}</Typography> */}
 
                               <StyledFormControl sx={{ width: '100%', maxWidth: '10rem', my: 3 }}>
                                 <InputLabel id="demo-simple-select-label">Platforms</InputLabel>
