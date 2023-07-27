@@ -105,7 +105,7 @@ export const ItemPage = () => {
                         key={genre.id}
                         label={genre.name}
                         sx={{ fontSize: '0.8rem', mr: 2 }}
-                        onClick={() => console.log()}
+                        onClick={() => navigate(`/games?genres=${genre.id}`)}
                       />
                     ))}
                   </Box>
@@ -173,6 +173,14 @@ export const ItemPage = () => {
             </Box>
             <AddRemoveCartButtonExtended item={item} screenshot={screenshots[0]?.original} />
           </Box>
+          {/* <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/7KDRqBpT8NA"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          ></iframe> */}
         </Box>
       </Container>
     );

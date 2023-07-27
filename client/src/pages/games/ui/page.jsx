@@ -129,10 +129,9 @@ export const GamesPage = () => {
             width: '50px',
             height: '50px',
             backgroundColor: theme.palette.action.active,
-  
           }}
-          className='no-highlight'
-          top='400'
+          className="no-highlight"
+          top="400"
           component={
             <KeyboardArrowUpIcon
               sx={{ position: 'relative', top: '2px', fontSize: '2rem', color: 'background.paper' }}

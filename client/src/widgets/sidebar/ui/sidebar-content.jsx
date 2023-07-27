@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Box, Button } from '@mui/material';
-import { StyledIconButton, FlexBox, ButtonMain, useMousePosition } from '@shared/index';
+import { StyledIconButton, FlexBox, ButtonMain } from '@shared/index';
+import { useSearchParams } from 'react-router-dom';
 
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -18,7 +19,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import zIndex from '@mui/material/styles/zIndex';
 
 export const SidebarContent = ({ filters, handleSubmit, isModalOpened, closeModal }) => {
   const [searchFilter, setSearchFilter] = useState(null);
