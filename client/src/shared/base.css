@@ -10,3 +10,7 @@ body {
   padding: 0;
   padding-top: 3.75rem;
 }
+
+.MuiPopover-root {
+  z-index: 100000 !important;
+}

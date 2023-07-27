@@ -6,7 +6,7 @@ import { Sidebar } from '@widgets/sidebar/index';
 export const SidebarLayout = () => {
   return (
     <Container maxWidth="xxl" sx={{ display: 'flex'}}>
-      <Sidebar />
+      <Sidebar /> 
       <Outlet />
     </Container>
   );

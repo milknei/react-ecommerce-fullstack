@@ -103,12 +103,17 @@ export const CartMenu = () => {
                               left: 0,
                               background: ` center / cover no-repeat url(${item.screenshot})`,
                               opacity: 0.1,
+                              zIndex: 1
                             }}
                           ></Box>
-                          <FlexBox sx={{ padding: '15px 0' }}>
+                          <FlexBox sx={{ padding: '15px 0', zIndex: 2, position: 'relative' }}>
                             <Box sx={{ flex: '1 1 60%' }}>
                               <FlexBox sx={{ marginBottom: '0.3125rem' }}>
-                                <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                                <Typography
+                                  variant="body1"
+                                  sx={{ fontWeight: 'bold', cursor: 'pointer' }}
+                                  onClick={() => navigate(`games/${item.slug}`)}
+                                >
                                   {item.name}
                                 </Typography>
                                 <StyledIconButton onClick={() => dispatch(removeFromCart({ id: item.id }))}>

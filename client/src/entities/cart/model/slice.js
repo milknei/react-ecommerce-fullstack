@@ -23,9 +23,11 @@ export const cartSlice = createSlice({
       if (!isInCart) state.cart = [...state.cart, action.payload];
       else
         state.cart = state.cart.map((item) => {
-          if (item.id === action.payload.id) item.quantity += action.payload.quantity;
+          if (item.id === action.payload.id && item.platform === action.payload.platform)
+            item.quantity += action.payload.quantity;
           return item;
         });
+
       state.totalPrice = getTotalPrice(state.cart);
       setCartLocalStorage(state.cart);
     },

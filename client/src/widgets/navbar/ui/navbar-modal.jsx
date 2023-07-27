@@ -89,7 +89,7 @@ export const NavbarModal = ({ closeModal, isModalOpened, isLoggedIn, username })
                     <CloseIcon size="large" sx={{ color: 'text.primary' }} />
                   </StyledIconButton>
                 </FlexBox>
-                <Box sx={{ overflowY: 'scroll', flex: '1 1 auto' }}>
+                <Box sx={{ overflowY: 'scroll', flex: '1 1 auto', overflow: 'hidden' }}>
                   <List
                     sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', mx: 2.5 }}
                     component="nav"

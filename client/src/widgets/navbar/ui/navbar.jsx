@@ -20,12 +20,19 @@ export const Navbar = () => {
   const wishList = useSelector((state) => state.wishList.wishList);
   const user = useSelector((state) => state.user);
   const theme = useTheme();
-  const isMediumSize = useMediaQuery(theme.breakpoints.down('md'));
 
   const closeModal = () => setIsModalOpened(false);
 
   return (
-    <>
+    <Box sx={{
+      width: '100%',
+        backgroundColor: 'background.default',
+        color: 'tex.primary',
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        zIndex: '1000',
+      }}>
       <NavbarModal
         closeModal={closeModal}
         isModalOpened={isModalOpened}
@@ -33,18 +40,13 @@ export const Navbar = () => {
         username={user.username}
       />
       <Container
-        maxWidth="xl"
+        maxWidth="xxl"
         sx={{
           display: 'flex',
           alignItems: 'center',
           width: '100%',
           height: '3.75rem',
-          backgroundColor: 'background.default',
-          color: 'tex.primary',
-          position: 'fixed',
-          top: '0',
-          left: '0',
-          zIndex: '1000',
+          mx: 'auto'
         }}
       >
         <Box
@@ -152,6 +154,6 @@ export const Navbar = () => {
           </Box>
         </Box>
       </Container>
-    </>
+    </Box>
   );
 };

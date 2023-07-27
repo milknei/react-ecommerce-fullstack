@@ -24,10 +24,8 @@ export const AppRouter = () => {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/" element={<SidebarLayout />}>
-          <Route path="games" element={<GamesPage />} />
-          <Route path="games/:itemSlug" element={<ItemPage />} />
-        </Route>
+        <Route path="games" element={<GamesPage />} />
+        <Route path="games/:itemSlug" element={<ItemPage />} />
         <Route path="registration" element={<SignUp />} />
         <Route path="login" element={<SingIn />} />
         <Route path="checkout" element={<CheckoutPage />} />

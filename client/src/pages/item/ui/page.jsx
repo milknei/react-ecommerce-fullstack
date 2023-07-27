@@ -46,7 +46,7 @@ export const ItemPage = () => {
 
   if (item && screenshots)
     return (
-      <>
+      <Container maxWidth="xxl">
         {/* <Box
           sx={{
             position: 'absolute',
@@ -195,7 +195,7 @@ export const ItemPage = () => {
             <AddRemoveCartButtonExtended item={item} screenshot={screenshots[0]?.original} />
           </Box>
         </Box>
-      </>
+      </Container>
     );
   else return <LoadingProgress />;
 };

@@ -1,9 +1,20 @@
 const apiUrl = import.meta.env.VITE_API_URL;
 const apiKey = import.meta.env.VITE_API_KEY;
 
-export const getItemsBase = async () => {
+export const getItemsBase = async (type = 'games', pageSize = '24', page = '1') => {
   try {
-    const response = await fetch(`${apiUrl}/games?key=${apiKey}&page=1&page_size=24`);
+    const response = await fetch(`${apiUrl}/${type}?key=${apiKey}&page=${page}&page_size=${pageSize}`);
+    const data = await response.json();
+    data.results.map((item) => (item.price = (item.added % 1000) / 10));
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getItemsByUrl = async (url) => {
+  try {
+    const response = await fetch(url);
     const data = await response.json();
     data.results.map((item) => (item.price = (item.added % 1000) / 10));
     return data;
@@ -44,9 +55,33 @@ export const getItemDetail = async (game, req) => {
   }
 };
 
-export const searchItem = async (searchQuery, pageSize, page) => {
+export const searchItem = async (searchQuery, pageSize = 24, page = 1) => {
   try {
-    const response = await fetch(`${apiUrl}/games?key=${apiKey}&page=${page}&page_size=${pageSize}&search=${searchQuery}`);
+    const response = await fetch(
+      `${apiUrl}/games?key=${apiKey}&page=${page}&page_size=${pageSize}&search=${searchQuery}`
+    );
+    const data = await response.json();
+    data.results.map((item) => (item.price = (item.added % 1000) / 10));
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getFilteredItems = async (filters, searchFilter, ordering, pageSize = 24, page = 1) => {
+  let filtersString = '';
+  console.log(ordering);
+
+  if (searchFilter) filtersString += `&search=${searchFilter}`;
+
+  filters.forEach((f) => {
+    if (f.items.length > 0) filtersString += `&${f.name}=${f.items.join(',')}`;
+  });
+
+  if (ordering) filtersString += `&ordering=${ordering}`;
+
+  try {
+    const response = await fetch(`${apiUrl}/games?key=${apiKey}&page=${page}&page_size=${pageSize}${filtersString}`);
     const data = await response.json();
     data.results.map((item) => (item.price = (item.added % 1000) / 10));
     return data;

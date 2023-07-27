@@ -9,7 +9,7 @@ export const CardSlider = ({ images, name, isHovered }) => {
     <Box
       sx={{
         position: 'relative',
-        background: `no-repeat center/80% url("${activeImage.image}")`,
+        background: `no-repeat center/80% url("${activeImage?.image}")`,
         backgroundSize: 'cover',
         scale: isHovered ? '1' : '1.02',
         zIndex: 21,
@@ -59,7 +59,7 @@ export const CardSlider = ({ images, name, isHovered }) => {
         </Box>
       ) : null}
       <img
-        src={images[0].image}
+        src={images[0]?.image}
         alt={name}
         style={{
           opacity: isHovered ? 0 : 1,

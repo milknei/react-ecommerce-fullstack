@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Box, Typography, useTheme } from '@mui/material';
+import { Box, Typography, useTheme, useMediaQuery } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { FlexBox, ParallelogramTag } from '@shared/index';
-import { AddRemoveCartButton } from '@features/index';
+import { AddRemoveCartButton, AddRemoveWishListButton } from '@features/index';
 import { AddRemoveWishListButtonExtended } from '@features/index';
 import { Platforms } from './platforms';
 import { CardSlider } from './cad-slider';
@@ -15,6 +15,7 @@ export const ItemCardDetailed = ({ item }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [screenshots, setScreenshots] = useState(null);
   const { id, name, released, genres, rating, price, parent_platforms, slug } = item;
+  const isTouchScreen = useMediaQuery('(pointer:coarse)');
 
   useEffect(() => {
     const getScreenshots = async () => {
@@ -32,7 +33,11 @@ export const ItemCardDetailed = ({ item }) => {
   if (!screenshots) return;
   else
     return (
-      <Box sx={{ position: 'relative' }} onMouseOver={() => setIsHovered(true)} onMouseOut={() => setIsHovered(false)}>
+      <Box
+        sx={{ position: 'relative', height: 'auto' }}
+        onMouseOver={() => setIsHovered(true)}
+        onMouseOut={() => setIsHovered(false)}
+      >
         <Box
           sx={{
             boxShadow: isHovered
@@ -77,12 +82,26 @@ export const ItemCardDetailed = ({ item }) => {
               </FlexBox>
             </Box>
             <ParallelogramTag text={`$ ${price}`} style={{ maxWidth: '3rem' }} />
-            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-              <AddRemoveWishListButtonExtended item={item} style="outlined" color="neutral" />
+            <Box
+              sx={{ display: 'flex', alignItems: 'center', color: 'text.disabled', justifyContent: 'space-between  ' }}
+            >
+              <AddRemoveWishListButton item={item} />
+              {isTouchScreen && (
+                <Box
+                  sx={{ py: 1, width: '100%', textAlign: 'center', textDecoration: 'underline', cursor: 'pointer' }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsHovered(!isHovered);
+                  }}
+                >
+                  {isHovered ? 'Show less': 'Show more'}
+                </Box>
+              )}
+              <AddRemoveCartButton item={item} />
             </Box>
           </Box>
         </Box>
-        <ItemCardDescription released={released} genres={genres} rating={rating} isHovered={isHovered} />
+        {isHovered && <ItemCardDescription released={released} genres={genres} rating={rating} isHovered={isHovered} />}
       </Box>
     );
 };
